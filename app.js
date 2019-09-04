@@ -5,7 +5,7 @@ const cors = require('cors');
 const xssFilter = require('x-xss-protection')
 const logger = require('morgan')
 const app = express()
-const port = process.env.SERVER_PORT || 3333
+const port = process.env.PORT || 3333
 
 const catRoute = require('./src/routes/category')
 const productRoute = require('./src/routes/product')
