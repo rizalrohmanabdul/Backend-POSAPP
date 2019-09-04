@@ -9,7 +9,8 @@ const port = process.env.PORT || 3333
 
 const catRoute = require('./src/routes/category')
 const productRoute = require('./src/routes/product')
-
+const kasirRoute = require('./src/routes/kasir')
+const transRoute = require('./src/routes/transaksi')
 const whitelist = process.env.WHITELIST
 
 const corsOptions = (req, callback) => {
@@ -39,3 +40,5 @@ app.use(bodyParser.json()) // Body parse json
 app.use(bodyParser.urlencoded({ extended: false })) // body type
 app.use(`/cat`, catRoute)
 app.use(`/product`, productRoute)
+app.use(`/kasir`, kasirRoute)
+app.use(`/trans`, transRoute)

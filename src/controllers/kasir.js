@@ -1,37 +1,42 @@
-const soundModel = require("../models/sound");
+const kasirModel = require("../models/kasir");
 const help = require("../helpers/helpers");
 
 module.exports = {
-  getSound: (req, res) => {
-    soundModel
-      .getSound()
-      .then(resultSound => {
-        help.response(res, resultSound, 200);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  },
-  getSoundNow: (req, res) => {
-    soundModel
-      .getSoundNow()
-      .then(resultSound => {
-        help.response(res, resultSound, 200);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  },
-  insertSound: (req, res) => {
+  // getSound: (req, res) => {
+  //   soundModel
+  //     .getSound()
+  //     .then(resultSound => {
+  //       help.response(res, resultSound, 200);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // },
+  // getSoundNow: (req, res) => {
+  //   soundModel
+  //     .getSoundNow()
+  //     .then(resultSound => {
+  //       help.response(res, resultSound, 200);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // },
+  insertKasir: (req, res) => {
+    const date = new Date()
+    const ID = 'KSR'+ date.getFullYear() + (date.getMonth() + 1) + date.getDate() + date.getHours() + date.getMinutes() + date.getSeconds();
+    const salt = help.generateSalt()
+    const password = help.setPassword(req.body.password, salt)
     const data = {
-      sound_name: req.body.sound_name,
-      sound_file: 'Comming Soon',
-      sound_status: 0
+      id_kasir: ID,
+      kasir_name: req.body.kasir_name,
+      password: password.passwordHash,
+      salt: salt,
     };
-    soundModel
-      .insertSound(data)
-      .then(resultSound => {
-        const result = resultSound;
+    console.log(data)
+    kasirModel
+      .insertKasir(data)
+      .then(result => {
         help.response(res, result, 200, data);
       })
       .catch(error => {

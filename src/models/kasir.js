@@ -1,31 +1,31 @@
 const conn = require('../config/connect')
 
 module.exports = {
-  getSound: () => {
+  // getSound: () => {
+  //   return new Promise((resolve, reject) => {
+  //     conn.query('SELECT * FROM tb_sound', (err, result) => {
+  //       if (!err) {
+  //         resolve(result)
+  //       } else {
+  //         reject(new Error(err)) 
+  //       }
+  //     })
+  //   })
+  // },
+  // getSoundNow: () => {
+  //   return new Promise((resolve, reject) => {
+  //     conn.query('SELECT sound_name FROM tb_sound WHERE sound_status = 1', (err, result) => {
+  //       if (!err) {
+  //         resolve(result)
+  //       } else {
+  //         reject(new Error(err)) 
+  //       }
+  //     })
+  //   })
+  // },
+  insertKasir: (data) => {
     return new Promise((resolve, reject) => {
-      conn.query('SELECT * FROM tb_sound', (err, result) => {
-        if (!err) {
-          resolve(result)
-        } else {
-          reject(new Error(err)) 
-        }
-      })
-    })
-  },
-  getSoundNow: () => {
-    return new Promise((resolve, reject) => {
-      conn.query('SELECT sound_name FROM tb_sound WHERE sound_status = 1', (err, result) => {
-        if (!err) {
-          resolve(result)
-        } else {
-          reject(new Error(err)) 
-        }
-      })
-    })
-  },
-  insertSound: (data) => {
-    return new Promise((resolve, reject) => {
-      conn.query('INSERT INTO tb_sound SET ? ', data, (err, result) => {
+      conn.query('INSERT INTO tb_kasir SET ? ', data, (err, result) => {
         if (!err) {
           resolve(result)
         } else {
