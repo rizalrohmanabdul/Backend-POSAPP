@@ -4,27 +4,22 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey('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');
 
 module.exports = {
-  // getPoint: (req, res) => {
-  //   pointModel
-  //     .getPoint()
-  //     .then(resultPoint => {
-  //       help.response(res, resultPoint, 200);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // },
-  // getPointMe: (req, res) => {
-  //   const id_users = req.params.id_users;
-  //   pointModel
-  //     .getPointMe(id_users)
-  //     .then(resultPoint => {
-  //       help.response(res, resultPoint, 200);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // },
+  getTrans: (req, res) => {
+    let search = req.query.search
+    let day = req.query.day
+    let week = req.query.week
+    let month = req.query.month
+    let year = req.query.year
+    
+    transModel
+      .getTrans(search, day, week, month, year)
+      .then(result => {
+        help.response(res, result, 200);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
   insertCart: (req, res) => {
     const data = {
       id_trans:  'X',
@@ -55,24 +50,29 @@ module.exports = {
     };
     const msg = {
       to: 'downloadaplikasi27@gmail.com',
-      from: 'kasir@posapp.com',
-      subject: 'Terima Kasih Telah Membeli Di Toko Kami',
-      text: 'and easy to do anywhere, even with Node.js',
-      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      from: 'rizalrohman@ex.com',
+      subject: 'Undangan Interview di PT Mandiri',
+      text: 'Dear Anja Putro Prayogo, A.Md.Kom  ',
+      html: '<strong>Kami beritahukan Bahwa nama anda telah terlibat interview dan harus datang ke kantor kami pada hari minggu, kalau gk hadir awas lu gua golok</strong>',
     };
-    sgMail.send(msg);
+    sgMail.send(msg).then(result => {
+      help.response(res, result, 200, data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
     const data = {
       id_trans:  ID,
       status: 'sukses'
     };
-    transModel
-      .insertTrans(data)
-      .then(result => {
-        help.response(res, result, 200, data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    // transModel
+    //   .insertTrans(data)
+    //   .then(result => {
+    //     help.response(res, result, 200, data);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   },
   updatePoint: (req, res) => {
     const id_point = req.params.id_point;

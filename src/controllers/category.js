@@ -1,7 +1,7 @@
 const catModel = require('../models/category')
 const help = require('../helpers/helpers')
 
-const jwt = require('jsonwebtoken')
+
 
 module.exports = { 
   getCat: (req,  res) => {

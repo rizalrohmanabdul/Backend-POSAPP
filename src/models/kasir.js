@@ -1,28 +1,23 @@
 const conn = require('../config/connect')
 
 module.exports = {
-  // getSound: () => {
-  //   return new Promise((resolve, reject) => {
-  //     conn.query('SELECT * FROM tb_sound', (err, result) => {
-  //       if (!err) {
-  //         resolve(result)
-  //       } else {
-  //         reject(new Error(err)) 
-  //       }
-  //     })
-  //   })
-  // },
-  // getSoundNow: () => {
-  //   return new Promise((resolve, reject) => {
-  //     conn.query('SELECT sound_name FROM tb_sound WHERE sound_status = 1', (err, result) => {
-  //       if (!err) {
-  //         resolve(result)
-  //       } else {
-  //         reject(new Error(err)) 
-  //       }
-  //     })
-  //   })
-  // },
+  getByEmail: (email) => {
+    console.log('x', email)
+    const newDate = new Date()
+    return new Promise((resolve, reject) => {
+      conn.query('SELECT * FROM tb_kasir WHERE kasir_user=?', email, (err, result) => {
+            console.log(email);
+            conn.query('UPDATE tb_kasir SET	login_at = ? WHERE kasir_user=?',[newDate, email], (err, result) => {
+              console.log(result)
+            })
+            if (!err) {
+                resolve(result)
+            } else {
+                reject(err)
+            }
+        })
+    })
+},
   insertKasir: (data) => {
     return new Promise((resolve, reject) => {
       conn.query('INSERT INTO tb_kasir SET ? ', data, (err, result) => {
